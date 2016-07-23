@@ -1,0 +1,9 @@
+# Project #
+*.iml
+.idea
+# Build #
+target
+# Key store #
+*.p12
+# Database #
+*.db

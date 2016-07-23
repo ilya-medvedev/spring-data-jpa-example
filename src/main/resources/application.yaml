@@ -1,0 +1,17 @@
+#server:
+#  port: 8443
+#  compression.enabled: true
+
+#keytool -genkey -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3652
+#  ssl:
+#    key-store: keystore.p12
+#    key-store-password: secret
+
+spring:
+  datasource.url: jdbc:h2:./registrator
+
+  jpa.hibernate.ddl-auto: validate
+
+#  h2.console.enabled: true
+
+#logging.level.root: DEBUG
