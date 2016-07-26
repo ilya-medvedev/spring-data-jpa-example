@@ -30,13 +30,13 @@ public class RegistrationRequest {
         private String password;
         private String nick;
 
-        public Builder setPassword(String password) {
+        public Builder setPassword(final String password) {
             this.password = password;
 
             return this;
         }
 
-        public Builder setNick(String nick) {
+        public Builder setNick(final String nick) {
             this.nick = nick;
 
             return this;
