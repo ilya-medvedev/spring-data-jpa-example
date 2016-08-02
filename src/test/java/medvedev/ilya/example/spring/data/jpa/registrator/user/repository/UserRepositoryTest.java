@@ -1,18 +1,17 @@
 package medvedev.ilya.example.spring.data.jpa.registrator.user.repository;
 
 import medvedev.ilya.example.spring.data.jpa.registrator.user.model.jpa.User;
-import medvedev.ilya.example.spring.data.jpa.registrator.Application;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.concurrent.ExecutionException;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
