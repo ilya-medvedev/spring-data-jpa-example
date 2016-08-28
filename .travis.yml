@@ -1,4 +1,11 @@
-language: java
+os: linux
+dist: trusty
+sudo: required
 
-jdk:
-  - oraclejdk8
+language: java
+jdk: openjdk8
+
+matrix:
+    include:
+      sudo: false
+      jdk: oraclejdk8
