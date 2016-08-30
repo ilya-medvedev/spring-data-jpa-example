@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @JsonDeserialize(builder = RegistrationRequest.Builder.class)
 public class RegistrationRequest {
-    @NotNull
+    @NotNull(message = "Password can not be null")
     private final String password;
 
     private final String nick;
