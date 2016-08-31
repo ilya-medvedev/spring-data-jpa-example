@@ -5,13 +5,18 @@
 #    key-store: keystore.p12
 #    key-store-password: secret
 spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
   datasource:
     url: jdbc:h2:./registrator
   jpa:
     hibernate:
       ddl-auto: validate
 #  h2:
-#    console.enabled: true
+#    console:
+#     enabled: true
 #logging:
 #  level:
 #    root: DEBUG
