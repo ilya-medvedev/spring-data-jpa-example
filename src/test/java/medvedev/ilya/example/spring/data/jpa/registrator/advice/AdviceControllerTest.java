@@ -2,6 +2,7 @@ package medvedev.ilya.example.spring.data.jpa.registrator.advice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import medvedev.ilya.example.spring.data.jpa.registrator.advice.controller.TestController;
+import medvedev.ilya.example.spring.data.jpa.registrator.advice.model.TestRequest;
 import medvedev.ilya.example.spring.data.jpa.registrator.advice.response.ErrorsResponse;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
@@ -47,17 +48,49 @@ public class AdviceControllerTest {
                         .json(output));
     }
 
-    @Test
-    public void httpMessageNotReadableExceptionTest() throws Exception {
+    private void httpMessageNotReadableExceptionTest(final String content) throws Exception {
         final RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/test")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content("{");
+                .content(content);
 
         final String error = "Request body is wrong";
         final ResultMatcher resultMatcher = MockMvcResultMatchers.status()
                 .isBadRequest();
 
         test(requestBuilder, resultMatcher, error);
+    }
+
+    @Test
+    public void withoutAdviceTest() throws Exception {
+        final TestRequest testRequest = new TestRequest("test");
+        final String content = objectMapper.writeValueAsString(testRequest);
+
+        final RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/test")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(content);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk())
+                .andExpect(MockMvcResultMatchers.content()
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.content()
+                        .json(content));
+    }
+
+    @Test
+    public void httpMessageNotReadableExceptionTest1() throws Exception {
+        httpMessageNotReadableExceptionTest("");
+    }
+
+    @Test
+    public void httpMessageNotReadableExceptionTest2() throws Exception {
+        httpMessageNotReadableExceptionTest("{");
+    }
+
+    @Test
+    public void httpMessageNotReadableExceptionTest3() throws Exception {
+        httpMessageNotReadableExceptionTest("}");
     }
 
     @Test

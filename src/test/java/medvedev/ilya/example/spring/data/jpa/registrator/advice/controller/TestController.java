@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @RequestMapping(value = "test")
 public class TestController {
     @RequestMapping(method = RequestMethod.POST)
-    public void test(@Valid @RequestBody TestRequest testRequest) {
-
+    public TestRequest test(@Valid @RequestBody TestRequest testRequest) {
+        return testRequest;
     }
 }
