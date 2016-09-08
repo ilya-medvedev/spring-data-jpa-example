@@ -1,4 +1,20 @@
 spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
   jpa:
     hibernate:
       ddl-auto: validate
+    properties:
+          hibernate:
+            format_sql: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
