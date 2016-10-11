@@ -1,4 +1,6 @@
 spring:
+  jmx:
+    enable: false
   mvc:
     throw-exception-if-no-handler-found: true
   resources:
