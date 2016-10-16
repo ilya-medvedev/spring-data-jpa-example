@@ -15,4 +15,9 @@ public class TestController {
     public TestRequest test(@Valid @RequestBody TestRequest testRequest) {
         return testRequest;
     }
+
+    @RequestMapping(value = "exception", method = RequestMethod.GET)
+    public void test() {
+        throw new RuntimeException();
+    }
 }

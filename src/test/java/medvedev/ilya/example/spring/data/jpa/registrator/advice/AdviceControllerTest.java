@@ -3,7 +3,6 @@ package medvedev.ilya.example.spring.data.jpa.registrator.advice;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import medvedev.ilya.example.spring.data.jpa.registrator.advice.controller.TestController;
 import medvedev.ilya.example.spring.data.jpa.registrator.advice.model.TestRequest;
-import medvedev.ilya.example.spring.data.jpa.registrator.advice.response.ErrorsResponse;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -11,13 +10,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.JsonPathResultMatchers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Collections;
-import java.util.List;
-
 public class AdviceControllerTest {
+    private final JsonPathResultMatchers codeMatcher = MockMvcResultMatchers.jsonPath("$.code");
+    private final JsonPathResultMatchers errorsMatcher = MockMvcResultMatchers.jsonPath("$.errors");
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final MockMvc mockMvc;
@@ -36,16 +36,14 @@ public class AdviceControllerTest {
             final ResultMatcher resultMatcher,
             final String error
     ) throws Exception {
-        final List<String> errors = Collections.singletonList(error);
-        final ErrorsResponse errorsResponse = new ErrorsResponse(errors);
-        final String output = objectMapper.writeValueAsString(errorsResponse);
-
         mockMvc.perform(requestBuilder)
                 .andExpect(resultMatcher)
                 .andExpect(MockMvcResultMatchers.content()
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.content()
-                        .json(output));
+                .andExpect(codeMatcher.isString())
+                .andExpect(codeMatcher.isNotEmpty())
+                .andExpect(errorsMatcher.isArray())
+                .andExpect(errorsMatcher.value(error));
     }
 
     private void httpMessageNotReadableExceptionTest(final String content) throws Exception {
@@ -119,13 +117,25 @@ public class AdviceControllerTest {
     }
 
     @Test
-    public void httpMediaTypeNotSupportedExceptionnTest() throws Exception {
+    public void httpMediaTypeNotSupportedExceptionTest() throws Exception {
         final RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/test")
                 .contentType(MediaType.APPLICATION_XML);
 
         final String error = "Content type '" + MediaType.APPLICATION_XML_VALUE + "' not supported";
         final ResultMatcher resultMatcher = MockMvcResultMatchers.status()
                 .isUnsupportedMediaType();
+
+        test(requestBuilder, resultMatcher, error);
+    }
+
+    @Test
+    public void unknownExceptionTest() throws Exception {
+        final RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/test/exception");
+
+        final ResultMatcher resultMatcher = MockMvcResultMatchers.status()
+                .isInternalServerError();
+
+        final String error = "Unknown error";
 
         test(requestBuilder, resultMatcher, error);
     }

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -27,11 +28,12 @@ public class AdviceController {
             final List<String> errors,
             final Exception exception
     ) {
+        final UUID code = UUID.randomUUID();
         final String status = httpStatus.getReasonPhrase();
 
-        LOGGER.warn(status, exception);
+        LOGGER.warn("{} ({})", status, code, exception);
 
-        final ErrorsResponse errorsResponse = new ErrorsResponse(errors);
+        final ErrorsResponse errorsResponse = new ErrorsResponse(code, errors);
 
         return ResponseEntity.status(httpStatus)
                 .body(errorsResponse);
@@ -95,5 +97,10 @@ public class AdviceController {
             final HttpMediaTypeNotSupportedException httpMediaTypeNotSupportedException
     ) {
         return errorsResponseByException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, httpMediaTypeNotSupportedException);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorsResponse> unknownException(final Exception exception) {
+        return errorsResponseByError(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error", exception);
     }
 }

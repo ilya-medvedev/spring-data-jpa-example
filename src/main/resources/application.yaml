@@ -16,26 +16,30 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-    properties:
-      hibernate:
-        format_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
 #  h2:
 #    console:
 #     enabled: true
-logging:
-  level:
-#    root: DEBUG
-    org:
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-    medvedev:
-      ilya:
-        example:
-          spring:
-            data:
-              jpa:
-                registrator: DEBUG
+#logging:
+#  level:
+##    root: DEBUG
+#    org:
+#      hibernate:
+#        SQL: DEBUG
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: TRACE
+#      apache:
+#        coyote:
+#          http11:
+#            Http11InputBuffer: DEBUG
+#    medvedev:
+#      ilya:
+#        example:
+#          spring:
+#            data:
+#              jpa:
+#                registrator: DEBUG
