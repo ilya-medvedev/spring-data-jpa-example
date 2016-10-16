@@ -20,6 +20,10 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+      apache:
+        coyote:
+          http11:
+            Http11InputBuffer: DEBUG
     medvedev:
       ilya:
         example:
