@@ -1,9 +1,11 @@
-package medvedev.ilya.example.spring.data.jpa.registrator.user.service;
+package medvedev.ilya.example.spring.data.jpa.registrator.user.service.impl;
 
 import medvedev.ilya.example.spring.data.jpa.registrator.user.model.json.request.RegistrationRequest;
 import medvedev.ilya.example.spring.data.jpa.registrator.user.model.json.response.UserIdResponse;
 import medvedev.ilya.example.spring.data.jpa.registrator.user.model.jpa.User;
 import medvedev.ilya.example.spring.data.jpa.registrator.user.repository.UserRepository;
+import medvedev.ilya.example.spring.data.jpa.registrator.user.service.UserService;
+import medvedev.ilya.example.spring.data.jpa.registrator.user.service.UserServiceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +24,7 @@ public class UserServiceImpl implements UserService {
         final String id = user.getId();
         final String nick = user.getNick();
 
-        LOGGER.debug("A new user \"{}\" has been registered with id \"{}\"", nick, id);
+        LOGGER.debug("A new user has been registered with \"{}\" id and \"{}\" nickname", id, nick);
 
         return new UserIdResponse(id);
     }
