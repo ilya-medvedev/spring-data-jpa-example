@@ -20,3 +20,10 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+    medvedev:
+      ilya:
+        example:
+          spring:
+            data:
+              jpa:
+                registrator: DEBUG
