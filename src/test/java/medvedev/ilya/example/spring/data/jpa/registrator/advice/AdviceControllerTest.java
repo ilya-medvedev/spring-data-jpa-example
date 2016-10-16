@@ -117,13 +117,25 @@ public class AdviceControllerTest {
     }
 
     @Test
-    public void httpMediaTypeNotSupportedExceptionnTest() throws Exception {
+    public void httpMediaTypeNotSupportedExceptionTest() throws Exception {
         final RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/test")
                 .contentType(MediaType.APPLICATION_XML);
 
         final String error = "Content type '" + MediaType.APPLICATION_XML_VALUE + "' not supported";
         final ResultMatcher resultMatcher = MockMvcResultMatchers.status()
                 .isUnsupportedMediaType();
+
+        test(requestBuilder, resultMatcher, error);
+    }
+
+    @Test
+    public void unknownExceptionTest() throws Exception {
+        final RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/test/exception");
+
+        final ResultMatcher resultMatcher = MockMvcResultMatchers.status()
+                .isInternalServerError();
+
+        final String error = "Unknown error";
 
         test(requestBuilder, resultMatcher, error);
     }
