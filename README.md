@@ -3,6 +3,7 @@ spring-data-jpa example
 
 [![Build Status](https://travis-ci.org/ilya-medvedev/spring-data-jpa-example.svg?branch=master)](https://travis-ci.org/ilya-medvedev/spring-data-jpa-example)
 [![Coverage Status](https://coveralls.io/repos/github/ilya-medvedev/spring-data-jpa-example/badge.svg?branch=master)](https://coveralls.io/github/ilya-medvedev/spring-data-jpa-example?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/59f07cea15f0d71da36bf6b8/badge.svg?style=flat)](https://www.versioneye.com/user/projects/59f07cea15f0d71da36bf6b8)
 
 Development Environment
 -----------------------
