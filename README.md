@@ -1,9 +1,8 @@
 spring-data-jpa example
 =======================
 
-[![Build Status](https://travis-ci.org/ilya-medvedev/spring-data-jpa-example.svg?branch=master)](https://travis-ci.org/ilya-medvedev/spring-data-jpa-example)
-[![Coverage Status](https://coveralls.io/repos/github/ilya-medvedev/spring-data-jpa-example/badge.svg?branch=master)](https://coveralls.io/github/ilya-medvedev/spring-data-jpa-example?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/59f07cea15f0d71da36bf6b8/badge.svg?style=flat)](https://www.versioneye.com/user/projects/59f07cea15f0d71da36bf6b8)
+[![Build Status](https://travis-ci.org/imedvedko/spring-data-jpa-example.svg?branch=master)](https://travis-ci.org/imedvedko/spring-data-jpa-example)
+[![Coverage Status](https://coveralls.io/repos/github/imedvedko/spring-data-jpa-example/badge.svg?branch=master)](https://coveralls.io/github/imedvedko/spring-data-jpa-example?branch=master)
 
 Development Environment
 -----------------------
@@ -13,7 +12,7 @@ Development Environment
 
 Download
 --------
-    git clone git@github.com:ilya-medvedev/spring-data-jpa-example.git
+    git clone git@github.com:imedvedko/spring-data-jpa-example.git
 
 Build
 -----
